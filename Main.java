@@ -1,44 +1,62 @@
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
-    Player player1 = new Player("Саня", 10, 60);
-    Player player2 = new Player("Толик", 22, 10);
-    Player player3 = new Player("Вася", 31, 92);
-    Player player4 = new Player("Игорь", 54, 130);
-   Team team = new Team("игруны", player1, player2, player3, player4); // создайте команду
-   team.sostav();
-        Course c = new Course(10,10, 50); //укажите сложность заданий
+        String[][] array = {
+                {"1", "1", "1", "1"},
+                {"1", "1", "1", "1"},
+                {"1", "1", "1", "1", "1"},
+                {"1", "1", "1", "1", "1"},
 
 
+        };
+        creator(array);
+        checker(array);
 
-        if(player1.IQ > c.a){
-            if(player1.IQ > c.b){
-                if(player1.IQ > c.c){
-                    System.out.println(player1.name + " Прошёл тесты");
-                } else {System.out.println(player1.name + " не прошёл тесты");}
-            } else {System.out.println(player1.name + " не прошёл тесты");}
-        } else {System.out.println(player1.name + " не прошёл тесты");}
-        if(player2.IQ > c.a){
-            if(player2.IQ > c.b){
-                if(player2.IQ > c.c){
-                    System.out.println(player2.name + " Прошёл тесты");
-                } else {System.out.println(player2.name + " не прошёл тесты");}
-            } else {System.out.println(player2.name + " не прошёл тесты");}
-        } else {System.out.println(player2.name + " не прошёл тесты");}
-        if(player3.IQ > c.a){
-            if(player3.IQ > c.b){
-                if(player3.IQ > c.c){
-                    System.out.println(player3.name + " Прошёл тесты");
-                }else {System.out.println(player3.name + " не прошёл тесты");}
-            }else {System.out.println(player3.name + " не прошёл тесты");}
-        }else {System.out.println(player3.name + " не прошёл тесты");}
-        if(player4.IQ > c.a){
-            if(player4.IQ > c.b){
-                if(player4.IQ > c.c){
-                    System.out.println(player4.name + " Прошёл тесты");
-                } else {System.out.println(player4.name + " не прошёл тесты");}
-            } else {System.out.println(player4.name + " не прошёл тесты");}
-        } else {System.out.println(player4.name + " не прошёл тесты");}
 
     }
+
+    public static void creator(String[][] array) throws MyArraySizeException {
+        for(int i = 0; i < array.length; i++){
+            if ( array[i].length > 4 )
+            {throw  new ArrayIndexOutOfBoundsException("Не верный размер массива! (указанный: " + array[i].length + ", максимальный: 4)");
+            }
+        }
+
+    }
+    private static void checker(String[][] array) throws MyArrayDataException {
+        int[][] perenos = new int[4][4];
+        try {
+            for (int i = 0; i < array.length; i++) {
+                for (int j = 0; j < array[0].length; j++) {
+
+                    try {
+
+                        perenos[i][j] = Integer.parseInt(array[i][j]);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Что-то не так с форматом" + " line: " + i + " column: " + j);
+                    }
+
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Не верный размер массива!");
+        }
+        sum(perenos);
+    }
+
+    private static void sum(int[] @NotNull [] perenos) {
+        int b = 0;
+        for (int i = 0; i < perenos.length; i++) {
+            for (int j = 0; j < perenos.length; j++) {
+                int a = perenos[i][j];
+                b = b + a;
+            }
+        }
+        System.out.println("Сумма: " + b);
+    }
+
 
 }

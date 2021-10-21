@@ -34,9 +34,11 @@ public class main {
         phonebook.add(new Employee(23235, "Green"));
 
 
-        for(int i = 0; i < phonebook.size(); i++){
-            System.out.println(phonebook.get(i));
-        }
+       for (Employee employee: phonebook){
+          if (employee.getSurname().equals("Green")) {
+              System.out.println(employee.getPhone());
+          }
+       }
 
 
     }
